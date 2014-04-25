@@ -65,16 +65,25 @@ public class PlaceViewAdapter extends CursorAdapter {
 
 		if (null != newCursor) {
 
-        // TODO - clear the ArrayList list so it contains
-		// the current set of PlaceRecords. Use the 
-		// getPlaceRecordFromCursor() method to add the
-		// current place to the list
-		
+			// TODO - clear the ArrayList list so it contains
+			// the current set of PlaceRecords. Use the 
+			// getPlaceRecordFromCursor() method to add the
+			// current place to the list
 
-            
-            
-            
-            
+			list.clear();
+			
+			// Check if the database is empty!
+			if(newCursor.moveToFirst())
+			{
+				do
+				{	// combine the getting of the record with adding it to the list
+					list.add(getPlaceRecordFromCursor(newCursor));
+					
+				} while(newCursor.moveToNext()); 
+				// moveToNext() returns false when the cursor is already past the last entry in the result set
+			}
+
+                       
             
             // Set the NotificationURI for the new cursor
 			newCursor.setNotificationUri(mContext.getContentResolver(),
@@ -147,11 +156,19 @@ public class PlaceViewAdapter extends CursorAdapter {
 
 			// TODO - Insert new record into the ContentProvider
 
+			ContentValues values = new ContentValues();
+        
+			// @see ContentProviderCustomUser example for inserting items with a ContentResolver and ContentValues objects
+			// use a contentValues object to set the values we want to put in the Content Resolver
+			// basically, creating one row to put in the SQLite storage
+			values.put(PlaceBadgesContract.FLAG_BITMAP_PATH, listItem.getFlagBitmapPath());
+			values.put(PlaceBadgesContract.COUNTRY_NAME, listItem.getCountryName());
+			values.put(PlaceBadgesContract.PLACE_NAME, listItem.getPlace());
+			values.put(PlaceBadgesContract.LAT, listItem.getLat());
+			values.put(PlaceBadgesContract.LON, listItem.getLon());
 			
-
-		
-        
-        
+			// Use a ContentResolver object to actually insert the values into the content provider
+			mContext.getContentResolver().insert(PlaceBadgesContract.CONTENT_URI, values);
         
         }
 
@@ -166,9 +183,10 @@ public class PlaceViewAdapter extends CursorAdapter {
 		list.clear();
 
 		// TODO - delete all records in the ContentProvider
-
-
-        
+		
+		// we can use the content resolver's delete() method and just pass it the URI.
+		// This will make it delete all the rows
+		mContext.getContentResolver().delete(PlaceBadgesContract.CONTENT_URI, null, null);
         
         
 	}
