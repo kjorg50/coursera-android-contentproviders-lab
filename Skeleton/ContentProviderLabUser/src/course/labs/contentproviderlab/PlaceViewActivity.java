@@ -124,7 +124,8 @@ public class PlaceViewActivity extends ListActivity implements
 		
 				
 		// TODO - Initialize a CursorLoader
-
+		// See - ContentProviderWithCursorLoader example
+		getLoaderManager().initLoader(0, null, this);
         
 	}
 
@@ -217,15 +218,22 @@ public class PlaceViewActivity extends ListActivity implements
 
 		// TODO - Create a new CursorLoader and return it
 		
-        
-        return null;
+		// can pass null to most of the values, and gets the URI form the Contract
+        return new CursorLoader(getApplicationContext(), PlaceBadgesContract.CONTENT_URI,null,null,null,null);
 	}
 
 	@Override
 	public void onLoadFinished(Loader<Cursor> newLoader, Cursor newCursor) {
 
 		// TODO - Swap in the newCursor
-
+		// This gets called after the cursor loader uses a cursor to query the content provider
+		// in the background thread.
+		
+		/* As soon as the cursor loader finishes loading up the results of our querying the content provider,  
+		this method will be called. At this point, we use the swapCursor method to give the new cursor to the 
+		PlaceViewAdapter. The adapter is then responsible for making sure that the list view is refreshed with the 
+		appropriate data. */
+		mCursorAdapter.swapCursor(newCursor);
 	
     }
 
@@ -233,7 +241,9 @@ public class PlaceViewActivity extends ListActivity implements
 	public void onLoaderReset(Loader<Cursor> newLoader) {
 
 		// TODO - Swap in a null Cursor
-
+		// This is basically the opposite of onLoadFinished. It is called whenever the cursor we obtained from the
+		// cursor loader is about to be closed down.
+		mCursorAdapter.swapCursor(null);
 	
     }
 
