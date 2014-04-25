@@ -57,7 +57,7 @@ public class PlaceViewActivity extends ListActivity implements
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
-        // TODO - Set up the app's user interface
+        //  - Set up the app's user interface
         // This class is a ListActivity, so it has its own ListView
 		mCursorAdapter = new PlaceViewAdapter(this, null, 0);
 
@@ -65,7 +65,7 @@ public class PlaceViewActivity extends ListActivity implements
 		// Put divider between ToDoItems and FooterView
 		getListView().setFooterDividersEnabled(true);
 
-		// TODO - add a footerView to the ListView
+		//  - add a footerView to the ListView
 		// You can use footer_view.xml to define the footer
 
 		// 1. get a layout inflater
@@ -78,7 +78,7 @@ public class PlaceViewActivity extends ListActivity implements
 		// enable it only if there is a location
 		mFooterView.setEnabled(mLastLocationReading != null);
 
-        // TODO - When the footerView's onClick() method is called, it must issue the
+        //  - When the footerView's onClick() method is called, it must issue the
         // following log call
         // log("Entered footerView.OnClickListener.onClick()");
 		
@@ -116,14 +116,14 @@ public class PlaceViewActivity extends ListActivity implements
 		});
               
 		
-		// TODO - Create and set empty PlaceViewAdapter
+		//  - Create and set empty PlaceViewAdapter
         // ListView's adapter should be a PlaceViewAdapter called mCursorAdapter
 
 		// Attach the adapter to this ListActivity's ListView
 		getListView().setAdapter(mCursorAdapter);
 		
 				
-		// TODO - Initialize a CursorLoader
+		//  - Initialize a CursorLoader
 		// See - ContentProviderWithCursorLoader example
 		getLoaderManager().initLoader(0, null, this);
         
@@ -138,7 +138,7 @@ public class PlaceViewActivity extends ListActivity implements
 		mMockLocationProvider = new MockLocationProvider(
 				LocationManager.NETWORK_PROVIDER, this);
 
-		// TODO - Check NETWORK_PROVIDER for an existing location reading.
+		//  - Check NETWORK_PROVIDER for an existing location reading.
 
 		// Acquire reference to the LocationManager
 		if (null == (mLocationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE)))
@@ -152,7 +152,7 @@ public class PlaceViewActivity extends ListActivity implements
 			mLastLocationReading = tempLoc;
 		}
 		
-		// TODO - Register to receive location updates from NETWORK_PROVIDER
+		//  - Register to receive location updates from NETWORK_PROVIDER
 		
 		// can use "this" since this class implements LocationListener
 		mLocationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, mMinTime, mMinDistance, this);
@@ -164,7 +164,7 @@ public class PlaceViewActivity extends ListActivity implements
 
 		mMockLocationProvider.shutdown();
 
-		// TODO - Unregister for location updates
+		//  - Unregister for location updates
 		mLocationManager.removeUpdates(this);		
 		
 		super.onPause();
@@ -180,7 +180,7 @@ public class PlaceViewActivity extends ListActivity implements
 	@Override
 	public void onLocationChanged(Location currentLocation) {
 
-		// TODO - Handle location updates
+		//  - Handle location updates
 		// Cases to consider
 		// 1) If there is no last location, keep the current location.
 		// 2) If the current location is older than the last location, ignore
@@ -216,7 +216,7 @@ public class PlaceViewActivity extends ListActivity implements
 	public Loader<Cursor> onCreateLoader(int arg0, Bundle arg1) {
 		log("Entered onCreateLoader()");
 
-		// TODO - Create a new CursorLoader and return it
+		//  - Create a new CursorLoader and return it
 		
 		// can pass null to most of the values, and gets the URI form the Contract
         return new CursorLoader(getApplicationContext(), PlaceBadgesContract.CONTENT_URI,null,null,null,null);
@@ -225,7 +225,7 @@ public class PlaceViewActivity extends ListActivity implements
 	@Override
 	public void onLoadFinished(Loader<Cursor> newLoader, Cursor newCursor) {
 
-		// TODO - Swap in the newCursor
+		//  - Swap in the newCursor
 		// This gets called after the cursor loader uses a cursor to query the content provider
 		// in the background thread.
 		
@@ -240,7 +240,7 @@ public class PlaceViewActivity extends ListActivity implements
 	@Override
 	public void onLoaderReset(Loader<Cursor> newLoader) {
 
-		// TODO - Swap in a null Cursor
+		//  - Swap in a null Cursor
 		// This is basically the opposite of onLoadFinished. It is called whenever the cursor we obtained from the
 		// cursor loader is about to be closed down.
 		mCursorAdapter.swapCursor(null);

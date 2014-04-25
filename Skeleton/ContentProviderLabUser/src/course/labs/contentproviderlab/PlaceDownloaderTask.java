@@ -33,7 +33,7 @@ public class PlaceDownloaderTask extends AsyncTask<Location, Void, PlaceRecord> 
 	// Change to false if you don't have network access
 	private static final boolean HAS_NETWORK = true;
 
-	// TODO - put your www.geonames.org account name here.
+	// DONE - put your www.geonames.org account name here.
 	private static String USERNAME = "kjorg50";
 
 	private HttpURLConnection mHttpUrl;

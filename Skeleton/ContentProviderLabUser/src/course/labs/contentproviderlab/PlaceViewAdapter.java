@@ -65,7 +65,7 @@ public class PlaceViewAdapter extends CursorAdapter {
 
 		if (null != newCursor) {
 
-			// TODO - clear the ArrayList list so it contains
+			// DONE - clear the ArrayList list so it contains
 			// the current set of PlaceRecords. Use the 
 			// getPlaceRecordFromCursor() method to add the
 			// current place to the list
@@ -154,12 +154,12 @@ public class PlaceViewAdapter extends CursorAdapter {
 			listItem.setFlagBitmapPath(filePath);
 			list.add(listItem);
 
-			// TODO - Insert new record into the ContentProvider
+			// DONE - Insert new record into the ContentProvider
 
 			ContentValues values = new ContentValues();
         
-			// @see ContentProviderCustomUser example for inserting items with a ContentResolver and ContentValues objects
-			// use a contentValues object to set the values we want to put in the Content Resolver
+			// @see ContentProviderCustomUser example for inserting items with a ContentResolver and ContentValues objects.
+			// Use a contentValues object to set the values we want to put in the Content Resolver
 			// basically, creating one row to put in the SQLite storage
 			values.put(PlaceBadgesContract.FLAG_BITMAP_PATH, listItem.getFlagBitmapPath());
 			values.put(PlaceBadgesContract.COUNTRY_NAME, listItem.getCountryName());
@@ -182,7 +182,7 @@ public class PlaceViewAdapter extends CursorAdapter {
 
 		list.clear();
 
-		// TODO - delete all records in the ContentProvider
+		// DONE - delete all records in the ContentProvider
 		
 		// we can use the content resolver's delete() method and just pass it the URI.
 		// This will make it delete all the rows
